@@ -4,9 +4,10 @@ I am building a web 2.0 blogging platform since 2018 rip :P
 
 Inspired by: Classic weblogs, Tumblr blogs with themes, independent photography portfolio websites, linktrees, the note taking app Obsidian (accumulative writing and structuring of pages). 
 
-In the marketplace:
+Versus the marketplace:
+- Unified mobile & desktop UI
 - No platform overhead when publishing, unlike social media
-- Dead simple setup, editing and maybe social features, unlike website generators
+- Hypersimple setup, editing and possibly social features, unlike website generators
 
 Target platform: Web – Mobile, desktop and social media app browsers. 
 
