@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, viewport-fit=cover' />
+    <meta name='format-detection' content='telephone=no'>
+    <meta name="theme-color" content="white" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="black" media="(prefers-color-scheme: dark)">
+    <meta name="description" content="Brutalist powerful artsy mobile-friendly microblogging. Social media plugin kinda site. Indie as shit. Sign up for free." />
+
+    <!-- Apple -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <!-- <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" /> -->
+    
+    <title>Snublr</title>
+
+    <!-- Set base if hosted at snublr -->
+    <script>
+      const hn = location.hostname.split('.')
+      const hnl = hn.length
+      const apex = hn[hnl - 2] ? hn[hnl - 2] : null
+
+      if (apex === 'snublr') {
+        const base = document.createElement('base')
+        
+        base.href = 'https://snublr2.web.app/'
+        document.head.append(base)
+      }
+    </script>
+
+  </head>
+  <body>
+    <script src="main.js" type="module"></script>
+  </body>
+</html>

@@ -1,0 +1,11 @@
+/* this fixes the gap issue */
+
+.video-container {
+  overflow: hidden;
+  /* max-width: 960px; /* 1920 but it's css */
+  
+}
+
+video {
+  scale: 1.003;
+}

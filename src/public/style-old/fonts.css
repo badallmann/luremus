@@ -1,0 +1,6 @@
+/* 'Roboto Mono', monospace; */
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital@0;1&display=swap');
+
+* {
+  font-family: 'Roboto Mono', monospace;
+}
