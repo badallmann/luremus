@@ -1,5 +1,5 @@
 import { pub, sub } from "/shared/pubsub.js";
-import { TOPICS }   from "/shared/constants.js";
+import { TOPICS }   from "/shared/topics.js";
 import { authentication } from "/models/authentication.js";
 import { menu }           from "/views/menu.js";
 

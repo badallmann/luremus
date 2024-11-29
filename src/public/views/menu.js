@@ -1,4 +1,4 @@
-import { TOPICS } from '/shared/constants.js';
+import { TOPICS } from '/shared/topics.js';
 import { html }   from '/shared/html.js';
 import { auth }   from '/models/firebase-services.js';
 import { authentication } from '/models/authentication.js'; // (Non-MVC practise)

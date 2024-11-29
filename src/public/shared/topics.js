@@ -1,4 +1,3 @@
-// Pubsub topics
 export const TOPICS = {
   // New menu navigation
   MENU_NAV: 'menu nav',
