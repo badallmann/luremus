@@ -1,8 +1,8 @@
 {
 	"folders": [
     {
-      "name": "archive",
-      "path": "archive"
+      "name": "luremus",
+      "path": "."
     },
     {
       "name": "public",
