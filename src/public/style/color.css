@@ -1,18 +1,15 @@
-/* Light mode */
+button, select {
+  background-color: inherit;
+}
+
 @media (prefers-color-scheme: light) {
   html {
     background-color: white;
-    color: black;
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   }
 
-  body, p, button, input, textarea,
-  a:link, a:visited, a:hover, a:active {
-    color: black;
-  }
-
-  button, select {
-    background-color: inherit;
+  html, body, p, button, input, textarea, a,
+  input::placeholder, textarea::placeholder {
     color: black;
   }
 
@@ -20,41 +17,31 @@
     border-color: black;
   }
 
-  input::placeholder, textarea::placeholder {
-    color: black;
-  }
-
   input:-webkit-autofill {
-    -webkit-box-shadow: white inset 0 0 0 99px;
+    -webkit-box-shadow: inset 0 0 0 99px white;
     background-clip: content-box;
     -webkit-text-fill-color: black;
     border: 1.5px solid black;
   }
 }
 
-/* Dark mode */
 @media (prefers-color-scheme: dark) {
   html {
     background-color: black;
   }
 
-  body, p, button, input, textarea,
-  a:link, a:visited, a:hover, a:active {
+  html, body, p, button, input, textarea, a
+  input::placeholder, textarea::placeholder {
     color: white;
   }
 
   input {
     background-color: black;
     border-color: white;
-    color: white;
-  }
-
-  input::placeholder, textarea::placeholder {
-    color: white;
   }
 
   input:-webkit-autofill {
-    -webkit-box-shadow: black inset 0 0 0 99px;
+    -webkit-box-shadow: inset 0 0 0 99px black;
     background-clip: content-box;
     -webkit-text-fill-color: white;
     border: 1.5px solid white;

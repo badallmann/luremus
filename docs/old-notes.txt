@@ -1,0 +1,31 @@
+! Åpne 'public' i VSCode for å utvikle, da funker import paths både lokalt og fra hosting.
+
+"Klatremus" er prosjektnavn for public facing navn "Snublr" siden fredag 22. mars 2024.
+
+For å oppdatere public/index.html: AWS S3 upload/replace fila, deretter invalidate cloudfront distribution med '/*' og vent litt.
+
+About jsconfig.json: Making vscode behave like web browsers for my choice of import paths. Background: Paths beginning in '/' are relative to the domain in a web context, and thus practical since to import from a file will have the same path regardless of where in the path hierarchy it is imported. Vscode naturally would understand only './' for this purpose but can be forced to behave like the web browser by set setting in jsconfig: "baseUrl": "./", "paths": { "/*": ["*"] }.
+
+Logg av konfigurering:
+Ny mappe for prosjektet innenfor icloud/webdev m denna readme-fila
+Nytt Firebase-prosjekt m id og navn
+Konfigurert hosting: public og firebase.json (index.html fulgte med). Klart til deploying nå samt besøk @ https://klatremus.web.app
+Settings live server points to '/klatremus/public', this simulates index.html as root
+
+Opt. extra security headers:
+{
+  "key": "Access-Control-Allow-Methods",
+  "value": "GET, POST, OPTIONS"
+},
+{
+  "key": "Access-Control-Allow-Headers",
+  "value": "Content-Type"
+},
+{
+  "key": "X-Content-Type-Options",
+  "value": "nosniff"
+},
+{
+  "key": "X-Frame-Options",
+  "value": "DENY"
+}

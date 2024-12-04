@@ -1,7 +1,7 @@
-import { TOPICS } from '/shared/topics.js';
-import { html }   from '/shared/html.js';
-import { auth }   from '/models/firebase-services.js';
-import { authentication } from '/models/authentication.js'; // (Non-MVC practise)
+import { auth }        from '/models/firebase-services.js'
+import { authModel }   from '/models/auth-model.js';
+import { TOPICS }      from '/shared/topics.js';
+import { html }        from '/shared/html.js';
 
 function navBtn(text, menuPage) {
   return html.pubButton(text, TOPICS.MENU_NAV, { navTo: menuPage })
@@ -16,9 +16,10 @@ const pages = {
     return [
       //html.br(),
       //html.p('Menu:'),
-      authentication.wasSignedInEarlier ? html.p('Signed out') : '',
+      authModel.wasSignedInEarlier ? html.p('Signed out') : '',
       navBtn('Sign in', menu.pages.signIn),
-      navBtn('Create user', menu.pages.createUser)
+      navBtn('Create user', menu.pages.createUser),
+      navBtn('About', menu.pages.about)
     ];
   },
   signIn() {
@@ -42,6 +43,12 @@ const pages = {
       //   html.passwordInputStopAutocomplete(),
       //   html.submitButton('Submit')
       // ])
+    ];
+  },
+  about() {
+    return [
+      backBtn(),
+      html.p('About Snublr...')
     ];
   },
   errorSigningIn() {
@@ -91,8 +98,10 @@ export const menu = {
 
   navHistory: [],
 
-  show() {
+  make() {
     document.body.appendChild(menu.element);
+    // Might conflict with current implementation waiting for auth state change
+    this.update(menu.pages.signedOut);
   },
 
   update(page) {

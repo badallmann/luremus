@@ -1,0 +1,60 @@
+@media (prefers-color-scheme: light) {
+  html {
+    background-color: white;
+    color: black;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+  }
+
+  body, p, button, input, textarea,
+  a:link, a:visited, a:hover, a:active {
+    color: black;
+  }
+
+  button, select {
+    background-color: inherit;
+    color: black;
+  }
+
+  input {
+    border-color: black;
+  }
+
+  input::placeholder, textarea::placeholder {
+    color: black;
+  }
+
+  input:-webkit-autofill {
+    -webkit-box-shadow: white inset 0 0 0 99px;
+    background-clip: content-box;
+    -webkit-text-fill-color: black;
+    border: 1.5px solid black;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    background-color: black;
+  }
+
+  body, p, button, input, textarea,
+  a:link, a:visited, a:hover, a:active {
+    color: white;
+  }
+
+  input {
+    background-color: black;
+    border-color: white;
+    color: white;
+  }
+
+  input::placeholder, textarea::placeholder {
+    color: white;
+  }
+
+  input:-webkit-autofill {
+    -webkit-box-shadow: black inset 0 0 0 99px;
+    background-clip: content-box;
+    -webkit-text-fill-color: white;
+    border: 1.5px solid white;
+  }
+}

@@ -1,8 +1,15 @@
 {
 	"folders": [
-		{
-			"path": "src/public"
-		}
+    {
+      "name": "archive",
+      "path": "archive"
+    },
+    {
+      "name": "public",
+      "path": "src/public"
+    }
   ],
-  "settings": {}
+  "settings": {
+    "liveServer.settings.multiRootWorkspaceName": "public"
+  }
 }

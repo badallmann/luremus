@@ -1,4 +1,4 @@
-import { html } from '../shared/html.js';
+import { html } from '../src/public/shared/html.js';
 import { focus } from '/shared/utils.js';
 import { pub, sub, unsub, inspect } from '/shared/pubsub.js';
 import { ha, ba, bp, dqs, dqsa, css } from '/shared/misc.js';

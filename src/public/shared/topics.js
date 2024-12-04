@@ -1,5 +1,5 @@
 export const TOPICS = {
-  // New menu navigation
+  // Menu navigation
   MENU_NAV: 'menu nav',
   MENU_NAV_BACK: 'menu nav back',
 
@@ -13,7 +13,7 @@ export const TOPICS = {
   SIGN_OUT:    'sign out',
   DELETE_USER: 'delete user',
 
-  // Errors
+  // Auth errors
   ERROR_SIGNING_IN:    'error signing in',
   ERROR_CREATING_USER: 'error creating user',
 };

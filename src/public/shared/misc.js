@@ -11,14 +11,12 @@ function css(str) {
   ha(s)
 }
 
-export function addStylesheets(hrefs, media = 'all') {
+export function addStylesheets(...hrefs) {
   hrefs.forEach(href => {
-    // Check if the stylesheet is already added to avoid duplicates
     if (!document.querySelector(`link[href="${href}"]`)) {
       const link = document.createElement('link');
       link.rel = 'stylesheet';
       link.href = href;
-      link.media = media;
       document.head.appendChild(link);
     }
   });
