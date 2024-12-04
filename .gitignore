@@ -69,7 +69,8 @@ node_modules/
 .dataconnect
 
 # custom
+.gitignore
+.DS_Store
 **/.DS_Store
 src/.firebase
 src/.firebaserc
-src/.gitignore
