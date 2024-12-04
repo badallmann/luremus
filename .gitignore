@@ -69,7 +69,6 @@ node_modules/
 .dataconnect
 
 # custom
-.DS_Store
 **/.DS_Store
 src/.firebase
 src/.firebaserc
