@@ -20,7 +20,7 @@ function production() {
 function development() {
   console.log('Development environment');
 
-  firebase();
+  //firebase();
   renderPortal();
   //testWithSubdomain('baslak');
 }
