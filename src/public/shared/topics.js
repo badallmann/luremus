@@ -1,6 +1,7 @@
 export const TOPICS = {
+
   // Menu navigation
-  MENU_NAV: 'menu nav',
+  MENU_NAV:      'menu nav',
   MENU_NAV_BACK: 'menu nav back',
 
   // Auth state
@@ -10,10 +11,11 @@ export const TOPICS = {
   // Auth actions
   SUBMIT_SIGN_IN:     'submit sign in',
   SUBMIT_CREATE_USER: 'submit create user',
-  SIGN_OUT:    'sign out',
-  DELETE_USER: 'delete user',
+  SIGN_OUT:           'sign out',
+  DELETE_USER:        'delete user',
 
   // Auth errors
   ERROR_SIGNING_IN:    'error signing in',
   ERROR_CREATING_USER: 'error creating user',
+
 };
