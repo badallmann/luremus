@@ -1,6 +1,6 @@
 import { pub, sub } from '/shared/pubsub.js';
 import { TOPICS }   from '/shared/topics.js';
-import { auth }     from '/models/firebase-services.js';
+import { auth }     from '/firebase/init-services.js';
 import {
   createUserWithEmailAndPassword,
   updateProfile,

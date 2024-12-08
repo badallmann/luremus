@@ -4,3 +4,4 @@
 export const longan = {};
 
 // Example: Image upload. Sketch in Freeform
+// See views/ex-file-upload-btn.js

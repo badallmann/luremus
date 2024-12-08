@@ -1,6 +1,6 @@
 import { coupleTopics }          from "/controllers/couplings.js";
-import { initializeFirebaseSDK } from "/models/firebase-services.js";
-import { authModel }             from "/models/auth-model.js";
+import { initializeFirebaseSDK } from "/firebase/init-services.js";
+import { authModel }             from "/firebase/auth-model.js";
 import { getEnvironment }        from "/models/url-details.js";
 import { renderBasedOnSubdomain, testWithSubdomain } from "/models/subdomain-handling.js"
 import { renderPortal }          from '/views/portal.js'
@@ -20,7 +20,7 @@ function production() {
 function development() {
   console.log('Development environment');
 
-  //firebase();
+  firebase();
   renderPortal();
   //testWithSubdomain('baslak');
 }

@@ -1,21 +1,23 @@
 export const TOPICS = {
 
   // Menu navigation
-  MENU_NAV:      'menu nav',
-  MENU_NAV_BACK: 'menu nav back',
+  MENU_NAV:      'MENU_NAV',
+  MENU_NAV_BACK: 'MENU_NAV_BACK',
 
   // Auth state
-  AUTH_STATE_CHANGE_SIGNED_OUT: 'auth state change signed out',
-  AUTH_STATE_CHANGE_SIGNED_IN:  'auth state change signed in',
+  AUTH_STATE_CHANGE_SIGNED_OUT: 'AUTH_STATE_CHANGE_SIGNED_OUT',
+  AUTH_STATE_CHANGE_SIGNED_IN:  'AUTH_STATE_CHANGE_SIGNED_IN',
 
   // Auth actions
-  SUBMIT_SIGN_IN:     'submit sign in',
-  SUBMIT_CREATE_USER: 'submit create user',
-  SIGN_OUT:           'sign out',
-  DELETE_USER:        'delete user',
+  SUBMIT_SIGN_IN:     'SUBMIT_SIGN_IN',
+  SUBMIT_CREATE_USER: 'SUBMIT_CREATE_USER',
+  SIGN_OUT:           'SIGN_OUT',
+  DELETE_USER:        'DELETE_USER',
 
   // Auth errors
-  ERROR_SIGNING_IN:    'error signing in',
-  ERROR_CREATING_USER: 'error creating user',
+  ERROR_SIGNING_IN:    'ERROR_SIGNING_IN',
+  ERROR_CREATING_USER: 'ERROR_CREATING_USER',
 
+  // Upload
+  SUBMIT_UPLOAD: 'SUBMIT_UPLOAD',
 };

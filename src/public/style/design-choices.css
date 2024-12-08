@@ -1,0 +1,13 @@
+html {
+  font-size: 22px;
+  font-family: monospace;
+}
+
+button {
+  text-decoration: underline;
+}
+
+input {
+  border: solid 2px;
+  width: 300px;
+}

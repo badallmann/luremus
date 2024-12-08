@@ -1,0 +1,20 @@
+/* Layout */
+
+/* Egentlig: #portal */
+
+body {
+  margin: 1rem;
+}
+
+body > h1,
+body > .menu {
+  margin: 1rem 0;
+}
+
+/* Menu */
+
+.menu > *,
+form > * {
+  display: block;
+  margin: 1rem 0;
+}

@@ -1,0 +1,109 @@
+/* default before styling */
+/* main: appearance: none; or all: initial; or unset; */
+
+:root {
+  --example_variable: 0;
+}
+
+html {
+  /* prevent zoom on double tap */
+  /* font-size: 16px; */
+
+  /* fix text sizing in landscape rotation */
+
+  /* cause of zoom issues in safari? */
+  /* text-size-adjust: none;
+  /* -webkit-text-size-adjust: none; */
+}
+
+p,
+h1, h2, h3, h4, h5, h6
+button
+{
+  text-align: left;
+  /* causes spaces even on word wrap. white-space: pre-wrap; */
+  overflow-wrap: break-word;
+}
+
+img, video {
+  /* remove default gap below */
+  display: block; 
+}
+
+button, input, select {
+  /* appearance: none; -webkit-appearance: none; */
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  max-width: 100%;
+  line-height: inherit;
+  font-size: inherit;
+  font-family: inherit;
+  background-color: transparent;
+}
+
+button, select {
+  cursor: grab; 
+}
+
+button:active {
+  cursor: grabbing;
+}
+
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+textarea {
+  vertical-align: top;
+  overflow-x: hidden;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+  /* resize: none; */
+  /* display: block; /* fixes various gliches of alignment */
+}
+
+input:focus, select:focus, textarea:focus, div[contentEditable] {
+  outline: none; -webkit-outline: none; /* disable focus highlighting */
+}
+
+/* label, input { display: block; } /* fixes various gliches of alignment */
+
+iframe {
+  display: block;
+}
+
+
+
+
+
+
+
+
+/* font extras */
+/* General font smoothing for better consistency across browsers */
+* {
+  -webkit-font-smoothing: antialiased;  /* Safari and Chrome */
+  -moz-osx-font-smoothing: grayscale;  /* Firefox on macOS */
+  text-rendering: optimizeLegibility;  /* Optimizes legibility for web fonts */
+}
+
+* {
+  -webkit-font-smoothing: antialiased; /* Safari and Chrome */
+  -moz-osx-font-smoothing: grayscale; /* Firefox on macOS */
+  text-rendering: optimizeLegibility;
+  font-weight: 400; /* Ensure standard font weight */
+}
+
+* {
+  letter-spacing: 0.1px;  /* Adjust based on your font */
+}
+
+* {
+    font-variant-ligatures: none;
+}
+
+* {
+  font-feature-settings: "liga" 1, "clig" 1;
+}

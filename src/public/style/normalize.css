@@ -1,50 +1,31 @@
-/* default before styling */
-/* main: appearance: none; or all: initial; or unset; */
+/* Prinsipp: HvilkE tags har hvilkeN prop? */
 
-:root {
-  --example_variable: 0;
-}
+/* Assuming all */
 
 * {
+  box-sizing: border-box;
   margin: 0;
   border: 0;
   padding: 0;
 }
+
+/* Font */
 
 html {
-  /* prevent zoom on double tap */
-  /* font-size: 16px; */
-
-  /* fix text sizing in landscape rotation */
-
-  /* cause of zoom issues in safari? */
-  /* text-size-adjust: none;
-  /* -webkit-text-size-adjust: none; */
+  font-size: 16px;
 }
 
-p, h1, h2, h3, h4, h5, h6, button {
-  text-align: left;
-  /* causes spaces even on word wrap. white-space: pre-wrap; */
-  overflow-wrap: break-word;
+button, input {
+  font: inherit;
 }
 
-img, video {
-  /* remove default gap below */
-  display: block; 
-}
+/* Color (prerequsite of color.css) */
 
 button, input, select {
-  /* appearance: none; -webkit-appearance: none; */
-  margin: 0;
-  border: 0;
-  border-radius: 0;
-  padding: 0;
-  max-width: 100%;
-  line-height: inherit;
-  font-size: inherit;
-  font-family: inherit;
-  background-color: transparent;
+  background-color: inherit;
 }
+
+/* Cursor */
 
 button, select {
   cursor: grab; 
@@ -54,27 +35,23 @@ button:active {
   cursor: grabbing;
 }
 
-input[type=number]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
+/* Position, overflow */
+
+p, form {
+  display: inline;
 }
 
-
-
-textarea {
-  vertical-align: top;
-  overflow-x: hidden;
+h1, h2, h3, h4, h5, h6
+p, em, b
+{
+  display: inline;
   overflow-wrap: break-word;
-  white-space: pre-wrap;
-  /* resize: none; */
-  /* display: block; /* fixes various gliches of alignment */
 }
 
-input:focus, select:focus, textarea:focus, div[contentEditable] {
-  outline: none; -webkit-outline: none; /* disable focus highlighting */
+button {
+  text-align: left;
 }
 
-/* label, input { display: block; } /* fixes various gliches of alignment */
-
-iframe {
-  display: block;
+input {
+  max-width: 100%;
 }

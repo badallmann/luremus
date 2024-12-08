@@ -5,8 +5,8 @@ window.onload = function() {
   addStylesheets(
     '/style/normalize.css',
     '/style/color.css',
-    '/style/menu.css',
-    '/style/temp.css',
+    '/style/design-choices.css',
+    '/style/draft.css',
   );
   init();
 }

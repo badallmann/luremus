@@ -3,55 +3,51 @@
 
 import { pub } from '/shared/pubsub.js';
 
-export const html = {
-  // Custom
-  create(tagName, attributes = {}, nodes = []) {
-    const element = document.createElement(tagName);
-  
-    // Set the attributes
-    for (const [key, value] of Object.entries(attributes)) {
-      element.setAttribute(key, value);
-    }
-  
-    // Function to append nodes
-    function appendNodes(nodes) {
-      if (typeof nodes === 'string') {
-        // If the node is a single string, create a single text node
-        element.appendChild(document.createTextNode(nodes));
-      } else if (Array.isArray(nodes)) {
-        // If it's an array, process each item
-        for (const node of nodes) {
-          if (typeof node === 'string') {
-            element.appendChild(document.createTextNode(node));
-          } else if (node instanceof Node) {
-            element.appendChild(node);
-          } else if (Array.isArray(node)) {
-            // If the node is an array, recursively process it
-            appendNodes(node);
-          } else {
-            console.warn('Unsupported node type:', node);
-          }
-        }
+// Custom
+function create(tagName, attributes = {}, nodes = []) {
+  const voidElements = ['area', 'base', 'br', 'col', 'command', 'embed', 'hr', 'img', 'input', 'keygen', 'link', 'meta', 'param', 'source', 'track', 'wbr'];
+
+  function isVoidElement(tagName) {
+    return voidElements.includes(tagName.toLowerCase());
+  }
+
+  function setAttributes(element, attributes) {
+    for (let key in attributes) element.setAttribute(key, attributes[key]);
+  }
+
+  function appendNodes(element, nodes) {    
+    function appendNode(node) {
+      if (typeof node === 'string') {
+        element.appendChild(document.createTextNode(node));
+      } else if (node instanceof Node) {
+        element.appendChild(node);
+      } else if (Array.isArray(node)) {
+        appendNodes(element, node);  // Recursion
       } else {
-        console.warn('Unsupported node type:', nodes);
+        console.warn('Unsupported node type:', node);
       }
     }
   
-    appendNodes(nodes);
-  
-    return element;
-  },
+    if (isVoidElement(element.tagName)) return;
 
-  // Quick typing
+    if (Array.isArray(nodes)) nodes.forEach(appendNode);
+    else appendNode(nodes);
+  }
+
+  const element = document.createElement(tagName);
+  setAttributes(element, attributes);
+  appendNodes(element, nodes);
+  return element;
+}
+
+export const html = {
+  create: create,
+
+
+
+  // Shorthands
   h1(...nodes) {
     return create('h1', {}, nodes);
-  },
-  br(count = 1) {
-    if (count === 1) {
-      return create('br');
-    } else {
-      return Array.from({ length: count }, () => create('br')); // Return an array for multiple
-    }
   },
   p(...nodes) {
     return create('p', {}, nodes);
@@ -62,30 +58,53 @@ export const html = {
   strong(...nodes) {
     return create('strong', {}, nodes);
   },
-
-
-  // Layout
   div(...nodes) {
     return this.create('div', {}, nodes);
   },
-
-
-  // Media
-  img(src, alt = '', attributes = {}) {
-    return create('img', { src, alt, ...attributes });
+  br(count = 1) {
+    if (count === 1) {
+      return create('br');
+    } else {
+      return Array.from({ length: count }, () => create('br')); // Return an array for multiple
+    }
   },
   
 
-  // Menu page elements
-  pubButton(text, topic, payload) {
+
+  // Action
+  pubBtn(text, topic, payload) {
     const b = create('button', {}, [text]);
     b.addEventListener('click', e => {
       const data = Object.assign({}, e, payload);
       pub(topic, data);
     });
-
     return b;
   },
+
+  
+
+  // Form commons (for semantics)
+  form(topicToSubmit, elements) {
+    const f = create('form', { novalidate: true }, elements);
+    f.addEventListener("submit", e => {
+      e.preventDefault();  // Stop built-in form submission
+      const formData = new FormData(e.target);
+      const data = {};
+      Object.assign(data, Object.fromEntries(formData));
+      pub(topicToSubmit, { formData: data })  // Data output
+    });
+    return f;
+  },
+  submitBtn(text = 'Submit') {
+    return create('button', {
+      type: 'submit',
+      style: 'font-weight: normal;' // Override iOS (bold)
+    }, [text]);
+  },
+
+
+
+  // Sign forms
   emailInput() {
     return create('input', { 
       type: 'email',
@@ -105,40 +124,29 @@ export const html = {
     });
   },
   passwordInputStopAutocomplete() {
-    const i = passwordInput()
+    const i = html.passwordInput();
     i.setAttribute('autocomplete', 'new-password');
     return i;
   },
-  submitButton(text) {
-    return create('button', {
-      type: 'submit',
-      style: 'font-weight: normal;' // Override iOS (bold)
-    }, [text]);
+  
+
+
+  
+  // // Upload form(s)
+
+  // uploadInput() {
+  //   return create('input', {
+  //     type: 'file',
+  //     multiple: true, // Allow multiple files
+  //     name: 'files[]', // Set name attribute for file input
+  //     class: 'file-upload-input', // Add a class for styling
+  //   });
+  // },
+
+
+
+  // Rendering
+  img(src, alt = '', attributes = {}) {
+    return create('img', { src, alt, ...attributes });
   },
-  form(topic, elements) {
-    const f = create('form', {
-      novalidate: true
-    }, elements);
-
-    f.addEventListener("submit", e => {
-      e.preventDefault(); // Stop built-in form submission
-
-      const formData = new FormData(e.target);
-      const data = {};
-      Object.assign(data, Object.fromEntries(formData));
-      pub(topic, { formData: data })
-    });
-
-    return f;
-  },
-
-  // Dep
-  funcButton(text, func) {
-    const b = create('button', {}, [text]);
-    b.addEventListener('click', func);
-    return b;
-  }
 }
-
-// Destructure methods from `html` for simplicity
-const { create, br, emailInput, passwordInput } = html;

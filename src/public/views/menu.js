@@ -1,21 +1,19 @@
-import { auth }        from '/models/firebase-services.js'
-import { authModel }   from '/models/auth-model.js';
+import { auth }        from '/firebase/init-services.js'
+import { authModel }   from '/firebase/auth-model.js';
 import { TOPICS }      from '/shared/topics.js';
 import { html }        from '/shared/html.js';
 
 function navBtn(text, menuPage) {
-  return html.pubButton(text, TOPICS.MENU_NAV, { navTo: menuPage })
+  return html.pubBtn(text, TOPICS.MENU_NAV, { navTo: menuPage })
 }
 
 function backBtn() {
-  return html.pubButton('←Back', TOPICS.MENU_NAV_BACK)
+  return html.pubBtn('←Back', TOPICS.MENU_NAV_BACK)
 }
 
 const pages = {
   signedOut() {
     return [
-      //html.br(),
-      //html.p('Menu:'),
       authModel.wasSignedInEarlier ? html.p('Signed out') : '',
       navBtn('Sign in', menu.pages.signIn),
       navBtn('Create user', menu.pages.createUser),
@@ -29,7 +27,7 @@ const pages = {
       html.form(TOPICS.SUBMIT_SIGN_IN, [
         html.emailInput(),
         html.passwordInput(),
-        html.submitButton('Submit')
+        html.submitBtn()
       ]),
     ];
   },
@@ -41,7 +39,7 @@ const pages = {
       // html.form(TOPICS.SUBMIT_CREATE_USER, [
       //   html.emailInput(),
       //   html.passwordInputStopAutocomplete(),
-      //   html.submitButton('Submit')
+      //   html.submitBtn()
       // ])
     ];
   },
@@ -67,11 +65,10 @@ const pages = {
   },
   signedIn() {
     return [
-      //html.br(),
-      //html.p('Menu:'),
       html.p('Signed in as ', html.em(auth.currentUser.email)),
+      navBtn('Example upload', menu.pages.exampleUpload),
       navBtn('Settings', menu.pages.settings),
-      html.pubButton('Sign out', TOPICS.SIGN_OUT)
+      html.pubBtn('Sign out', TOPICS.SIGN_OUT),
     ];
   },
   settings() {
@@ -79,23 +76,38 @@ const pages = {
       backBtn(),
       html.p('Settings:'),
       navBtn('Delete user…', menu.pages.askConfirmDeleteUser),
-    ]
+    ];
   },
   askConfirmDeleteUser() {
     return [
       backBtn(),
       html.p('Delete user:'),
       html.p('Are you sure?'),
-      html.pubButton('Confirm delete user', TOPICS.DELETE_USER)
-    ]
-  }
+      html.pubBtn('Confirm delete user', TOPICS.DELETE_USER)
+    ];
+  },
+
+
+  
+  exampleUpload() {
+    // get label elm to use as button
+    // get info from input elm to display file count
+
+    let uploadLabel;
+
+    return [
+      backBtn(),
+      html.form(TOPICS.SUBMIT_UPLOAD, [
+        uploadLabel,
+        html.submitBtn()
+      ]),
+    ];
+  },
 }
 
 export const menu = {
   pages,
-
   element: html.create('div', { 'class': 'menu' }),
-
   navHistory: [],
 
   make() {
