@@ -1,5 +1,5 @@
 import { html } from "/shared/html.js";
-import { css }  from "/shared/misc.js";
+import { css }  from "/shared/old-utils.js";
 
 export function baslak() {
   css(`

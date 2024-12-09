@@ -15,12 +15,11 @@ html {
     border-color: black;
   }
 
-  /* input:-webkit-autofill {
-    background-clip: content-box;
-    border: 1.5px solid black;
+  input:-webkit-autofill {
+    border-color: black;
     -webkit-box-shadow: inset 0 0 0 99px white;
     -webkit-text-fill-color: black;
-  } */
+  }
 }
 
 @media (prefers-color-scheme: dark) {
@@ -36,10 +35,9 @@ html {
     border-color: white;
   }
 
-  /* input:-webkit-autofill {
-    background-clip: content-box;
-    border: 1.5px solid white;
+  input:-webkit-autofill {
+    border-color: white;
     -webkit-box-shadow: inset 0 0 0 99px black;
     -webkit-text-fill-color: white;
-  } */
+  }
 }

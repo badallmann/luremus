@@ -1,64 +1,64 @@
-import { auth }        from '/firebase/init-services.js'
+import { auth }        from '/firebase/init-services.js';
 import { authModel }   from '/firebase/auth-model.js';
 import { TOPICS }      from '/shared/topics.js';
 import { html }        from '/shared/html.js';
 
-function navBtn(text, menuPage) {
-  return html.pubBtn(text, TOPICS.MENU_NAV, { navTo: menuPage })
+function navButton(text, menuPage) {
+  return html.pubButton(text, TOPICS.MENU_NAV, { navTo: menuPage })
 }
 
-function backBtn() {
-  return html.pubBtn('←Back', TOPICS.MENU_NAV_BACK)
+function backButton() {
+  return html.pubButton('←Back', TOPICS.MENU_NAV_BACK)
 }
 
 const pages = {
   signedOut() {
     return [
       authModel.wasSignedInEarlier ? html.p('Signed out') : '',
-      navBtn('Sign in', menu.pages.signIn),
-      navBtn('Create user', menu.pages.createUser),
-      navBtn('About', menu.pages.about)
+      navButton('Sign in', menu.pages.signIn),
+      navButton('Create user', menu.pages.createUser),
+      navButton('About', menu.pages.about)
     ];
   },
   signIn() {
     return [
-      backBtn(),
+      backButton(),
       html.p('Sign in:'),
       html.form(TOPICS.SUBMIT_SIGN_IN, [
         html.emailInput(),
         html.passwordInput(),
-        html.submitBtn()
+        html.submitButton()
       ]),
     ];
   },
   createUser() {
     return [
-      backBtn(),
+      backButton(),
       html.p('Snublr is indev and currently not accepting new users.')
       // html.p('Create user:'),
       // html.form(TOPICS.SUBMIT_CREATE_USER, [
       //   html.emailInput(),
       //   html.passwordInputStopAutocomplete(),
-      //   html.submitBtn()
+      //   html.submitButton()
       // ])
     ];
   },
   about() {
     return [
-      backBtn(),
+      backButton(),
       html.p('About Snublr...')
     ];
   },
   errorSigningIn() {
     return [
-      backBtn(),
+      backButton(),
       html.p('Error:'),
       html.p('Something went wrong. Please try again.'),
     ];
   },
   errorCreatingUser() {
     return [
-      backBtn(),
+      backButton(),
       html.p('Error:'),
       html.p('Something went wrong. Please try again.'),
     ];
@@ -66,41 +66,39 @@ const pages = {
   signedIn() {
     return [
       html.p('Signed in as ', html.em(auth.currentUser.email)),
-      navBtn('Example upload', menu.pages.exampleUpload),
-      navBtn('Settings', menu.pages.settings),
-      html.pubBtn('Sign out', TOPICS.SIGN_OUT),
+      navButton('Example upload', menu.pages.exampleUpload),
+      navButton('Settings', menu.pages.settings),
+      html.pubButton('Sign out', TOPICS.SIGN_OUT),
     ];
   },
   settings() {
     return [
-      backBtn(),
+      backButton(),
       html.p('Settings:'),
-      navBtn('Delete user…', menu.pages.askConfirmDeleteUser),
+      navButton('Delete user…', menu.pages.askConfirmDeleteUser),
     ];
   },
   askConfirmDeleteUser() {
+    // ! Requires recent sign in. Deletes only auth. Do not make deletion easy in production, ask ppl to email me instead
     return [
-      backBtn(),
+      backButton(),
       html.p('Delete user:'),
       html.p('Are you sure?'),
-      html.pubBtn('Confirm delete user', TOPICS.DELETE_USER)
+      html.p('(Deletion will not be that easy in production.'),
+      html.pubButton('Confirm delete user', TOPICS.DELETE_USER)
     ];
   },
-
-
-  
   exampleUpload() {
-    // get label elm to use as button
-    // get info from input elm to display file count
-
-    let uploadLabel;
+    const u = html.upload();
 
     return [
-      backBtn(),
+      backButton(),
       html.form(TOPICS.SUBMIT_UPLOAD, [
-        uploadLabel,
-        html.submitBtn()
-      ]),
+        u.input,
+        u.button,
+        u.fileCountDisplay,
+        html.submitButton()
+      ])
     ];
   },
 }

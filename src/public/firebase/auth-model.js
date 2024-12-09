@@ -1,5 +1,6 @@
 import { pub, sub } from '/shared/pubsub.js';
 import { TOPICS }   from '/shared/topics.js';
+import { getFormData } from '/shared/utils.js';
 import { auth }     from '/firebase/init-services.js';
 import {
   createUserWithEmailAndPassword,
@@ -9,11 +10,16 @@ import {
   signOut,
 } from 'https://www.gstatic.com/firebasejs/9.6.8/firebase-auth.js'
 
-export const authModel = {}
+export const authModel = {
+  wasSignedInEarlier: false,
+  observeAuthStateChanges,
+  signIn,
+  createAuthUser,
+  signOut,
+  deleteAuthUser
+}
 
-authModel.wasSignedInEarlier = false;
-
-authModel.observeAuthStateChanges = function () {
+function observeAuthStateChanges() {
   if (! auth) {
     console.log('! Auth not initialized. Cannot set observer for state changes');
     return;
@@ -30,9 +36,10 @@ authModel.observeAuthStateChanges = function () {
   })
 }
 
-authModel.signIn = async function (topicData) {
+async function signIn(topicData) {
   try {
-    const { email, password } = topicData.formData;
+    const { email, password } = getFormData(topicData.formData);
+
     await signInWithEmailAndPassword(auth, email, password);
   } catch (error) {
     console.error('Error signing in:', error.message);
@@ -41,12 +48,14 @@ authModel.signIn = async function (topicData) {
   }
 }
 
-authModel.createFirebaseUser = async function (topicData) {
+async function createAuthUser (topicData) {
   try {
-    const { email, password } = topicData.formData;
+    const { email, password } = getFormData(topicData.formData);
     const { user } = await createUserWithEmailAndPassword(auth, email, password);
+
     //await updateProfile(user, { displayName });
     console.log("User account created successfully:", user);
+
     return user;
   } catch (error) {
     console.error("Error creating user account:", error);
@@ -55,7 +64,7 @@ authModel.createFirebaseUser = async function (topicData) {
   }
 }
   
-authModel.signOut = async function () {
+authModel.signOut = async function() {
   try {
     // Attempt to sign out the user
     await signOut(auth);
@@ -69,7 +78,7 @@ authModel.signOut = async function () {
 }
 
 // ! Requires recent sign in
-authModel.deleteFirebaseUser = async function () {
+async function deleteAuthUser() {
   try {
     const user = auth.currentUser;
     await deleteUser(user);

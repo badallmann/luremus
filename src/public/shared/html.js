@@ -68,11 +68,20 @@ export const html = {
       return Array.from({ length: count }, () => create('br')); // Return an array for multiple
     }
   },
+
+
+
+
+
+  // Rendering
+  img(src, alt = '', attributes = {}) {
+    return create('img', { src, alt, ...attributes });
+  },
   
 
 
   // Action
-  pubBtn(text, topic, payload) {
+  pubButton(text, topic, payload) {
     const b = create('button', {}, [text]);
     b.addEventListener('click', e => {
       const data = Object.assign({}, e, payload);
@@ -83,28 +92,28 @@ export const html = {
 
   
 
-  // Form commons (for semantics)
+  // Form
+  // Why: Semantics. Also: built-in submit on enter
+  // FormData must be handled by getFormData()
   form(topicToSubmit, elements) {
     const f = create('form', { novalidate: true }, elements);
-    f.addEventListener("submit", e => {
-      e.preventDefault();  // Stop built-in form submission
-      const formData = new FormData(e.target);
-      const data = {};
-      Object.assign(data, Object.fromEntries(formData));
-      pub(topicToSubmit, { formData: data })  // Data output
+
+    f.addEventListener("submit", function(e) {
+      e.preventDefault();  // Prevent default form submission
+
+      const formData = new FormData(f);
+
+      pub(topicToSubmit, { formData });
     });
+
     return f;
   },
-  submitBtn(text = 'Submit') {
+  submitButton(text = 'Submit') {
     return create('button', {
       type: 'submit',
       style: 'font-weight: normal;' // Override iOS (bold)
     }, [text]);
   },
-
-
-
-  // Sign forms
   emailInput() {
     return create('input', { 
       type: 'email',
@@ -128,25 +137,39 @@ export const html = {
     i.setAttribute('autocomplete', 'new-password');
     return i;
   },
+  upload() {
+    const input = create('input', {
+      type: 'file',
+      id: 'upload',
+      multiple: true,
+      name: 'files[]',
+      class: 'file-upload-input',
+      style: 'display: none;'  // Hide the file input initially
+    });
+    
+    const button = create('button', { type: 'button', class: 'upload-button' });
+    button.textContent = 'Select Files';
+    button.addEventListener('click', () => {
+      input.click(); // Simulate click on input element
+    });
   
-
-
+    const fileCountDisplay = create('span', { class: 'file-count-display' });
   
-  // // Upload form(s)
-
-  // uploadInput() {
-  //   return create('input', {
-  //     type: 'file',
-  //     multiple: true, // Allow multiple files
-  //     name: 'files[]', // Set name attribute for file input
-  //     class: 'file-upload-input', // Add a class for styling
-  //   });
-  // },
-
-
-
-  // Rendering
-  img(src, alt = '', attributes = {}) {
-    return create('img', { src, alt, ...attributes });
-  },
+    // Create and hide the submit button initially
+    const submitButton = create('button', { type: 'submit', class: 'submit-button', style: 'display: none;' });
+    submitButton.textContent = 'Submit';
+  
+    // Handle file selection and show/hide buttons
+    input.addEventListener('change', () => {
+      const fileCount = input.files.length;
+      fileCountDisplay.textContent = `${fileCount} file(s) selected`;
+  
+      // Show submit button if files are selected
+      if (fileCount > 0) {
+        submitButton.style.display = '';  // Show the submit button
+      }
+    });
+  
+    return { input, button, fileCountDisplay, submitButton };
+  }
 }
