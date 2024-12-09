@@ -21,6 +21,7 @@ export function pub(eventId, data = {}) {
         // Remove the subscription unless tasked to stay
         unsub(sub.token);
       }
+      // Otherwise invisible: data is passed to func on call
       sub.func(data);
     });
   }

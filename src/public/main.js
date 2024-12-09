@@ -1,4 +1,4 @@
-import { addStylesheets } from "/shared/misc.js";
+import { addStylesheets } from "/shared/old-utils.js";
 import { init }           from "/controllers/init.js";
 
 window.onload = function() {

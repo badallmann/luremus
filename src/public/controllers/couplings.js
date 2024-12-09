@@ -2,6 +2,7 @@ import { authModel } from "/firebase/auth-model.js";
 import { pub, sub }  from "/shared/pubsub.js";
 import { TOPICS }    from "/shared/topics.js";
 import { menu }      from "/views/menu.js";
+import { longan } from '/models/longan.js';
 
 export function coupleTopics() {
   // Menu navigation
@@ -21,9 +22,9 @@ export function coupleTopics() {
 
   // Auth actions
     sub(TOPICS.SUBMIT_SIGN_IN,     authModel.signIn);
-    sub(TOPICS.SUBMIT_CREATE_USER, authModel.createFirebaseUser);
+    sub(TOPICS.SUBMIT_CREATE_USER, authModel.createAuthUser);
     sub(TOPICS.SIGN_OUT,           authModel.signOut);
-    sub(TOPICS.DELETE_USER,        authModel.deleteFirebaseUser);
+    sub(TOPICS.DELETE_USER,        authModel.deleteAuthUser);
 
   // Errors
     sub(TOPICS.ERROR_SIGNING_IN, () => {
@@ -34,5 +35,5 @@ export function coupleTopics() {
     });
 
   // Example upload
-    sub(TOPICS.SUBMIT_UPLOAD, () => {})  // longan
+    sub(TOPICS.SUBMIT_UPLOAD, longan.handleFileUpload);
 }
