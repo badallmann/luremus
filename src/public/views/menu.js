@@ -1,8 +1,11 @@
 import { auth }        from '/firebase/init-services.js';
+import { auth }        from '/firebase/init-services.js';
 import { authModel }   from '/firebase/auth-model.js';
 import { TOPICS }      from '/shared/topics.js';
 import { html }        from '/shared/html.js';
 
+function navButton(text, menuPage) {
+  return html.pubButton(text, TOPICS.MENU_NAV, { navTo: menuPage })
 function navButton(text, menuPage) {
   return html.pubButton(text, TOPICS.MENU_NAV, { navTo: menuPage })
 }
@@ -22,15 +25,20 @@ const pages = {
       navButton('Sign in', menu.pages.signIn),
       navButton('Create user', menu.pages.createUser),
       navButton('About', menu.pages.about)
+      navButton('Sign in', menu.pages.signIn),
+      navButton('Create user', menu.pages.createUser),
+      navButton('About', menu.pages.about)
     ];
   },
   signIn() {
     return [
       backButton(),
+      backButton(),
       html.p('Sign in:'),
       html.form(TOPICS.SUBMIT_SIGN_IN, [
         html.emailInput(),
         html.passwordInput(),
+        html.submitButton()
         html.submitButton()
       ]),
     ];
@@ -38,11 +46,13 @@ const pages = {
   createUser() {
     return [
       backButton(),
+      backButton(),
       html.p('Snublr is indev and currently not accepting new users.')
       // html.p('Create user:'),
       // html.form(TOPICS.SUBMIT_CREATE_USER, [
       //   html.emailInput(),
       //   html.passwordInputStopAutocomplete(),
+      //   html.submitButton()
       //   html.submitButton()
       // ])
     ];
@@ -50,11 +60,13 @@ const pages = {
   about() {
     return [
       backButton(),
+      backButton(),
       html.p('About Snublr...')
     ];
   },
   errorSigningIn() {
     return [
+      backButton(),
       backButton(),
       html.p('Error:'),
       html.p('Something went wrong. Please try again.'),
@@ -62,6 +74,7 @@ const pages = {
   },
   errorCreatingUser() {
     return [
+      backButton(),
       backButton(),
       html.p('Error:'),
       html.p('Something went wrong. Please try again.'),
@@ -73,16 +86,22 @@ const pages = {
       navButton('Example upload', menu.pages.exampleUpload),
       navButton('Settings', menu.pages.settings),
       html.pubButton('Sign out', TOPICS.SIGN_OUT),
+      navButton('Example upload', menu.pages.exampleUpload),
+      navButton('Settings', menu.pages.settings),
+      html.pubButton('Sign out', TOPICS.SIGN_OUT),
     ];
   },
   settings() {
     return [
       backButton(),
+      backButton(),
       html.p('Settings:'),
+      navButton('Delete user…', menu.pages.askConfirmDeleteUser),
       navButton('Delete user…', menu.pages.askConfirmDeleteUser),
     ];
   },
   askConfirmDeleteUser() {
+    // ! Requires recent sign in. Deletes only auth. Do not make deletion easy in production, ask ppl to email me instead
     // ! Requires recent sign in. Deletes only auth. Do not make deletion easy in production, ask ppl to email me instead
     return [
       resetButton(),
@@ -99,6 +118,7 @@ const pages = {
     u.dropArea.textContent = 'dropArea'
 
     return [
+      backButton(),
       backButton(),
       html.form(TOPICS.SUBMIT_UPLOAD, [
         u.input,

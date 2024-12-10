@@ -73,6 +73,16 @@ export const html = {
 
 
 
+
+  // Rendering
+  img(src, alt = '', attributes = {}) {
+    return create('img', { src, alt, ...attributes });
+  },
+  
+
+
+
+
   // Rendering
   img(src, alt = '', attributes = {}) {
     return create('img', { src, alt, ...attributes });
@@ -81,6 +91,7 @@ export const html = {
 
 
   // Action
+  pubButton(text, topic, payload) {
   pubButton(text, topic, payload) {
     const b = create('button', {}, [text]);
     b.addEventListener('click', e => {
@@ -95,6 +106,9 @@ export const html = {
   // Form
   // Why: Semantics. Also: built-in submit on enter
   // FormData must be handled by getFormData()
+  // Form
+  // Why: Semantics. Also: built-in submit on enter
+  // FormData must be handled by getFormData()
   form(topicToSubmit, elements) {
     const f = create('form', { novalidate: true }, elements);
 
@@ -104,10 +118,19 @@ export const html = {
       const formData = new FormData(f);
 
       pub(topicToSubmit, { formData });
+
+    f.addEventListener("submit", function(e) {
+      e.preventDefault();  // Prevent default form submission
+
+      const formData = new FormData(f);
+
+      pub(topicToSubmit, { formData });
     });
+
 
     return f;
   },
+  submitButton(text = 'Submit') {
   submitButton(text = 'Submit') {
     return create('button', {
       type: 'submit',
