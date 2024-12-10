@@ -3,6 +3,7 @@ export const TOPICS = {
   // Menu navigation
   MENU_NAV:      'MENU_NAV',
   MENU_NAV_BACK: 'MENU_NAV_BACK',
+  MENU_NAV_RESET: 'MENU_NAV_RESET',
 
   // Auth state
   AUTH_STATE_CHANGE_SIGNED_OUT: 'AUTH_STATE_CHANGE_SIGNED_OUT',

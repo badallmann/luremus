@@ -3,6 +3,6 @@ import { makeTitle } from "/views/title.js";
 
 export function renderPortal() {
   console.log('Rendering portal page');
-  makeTitle();
+  //makeTitle();
   menu.make();
 }

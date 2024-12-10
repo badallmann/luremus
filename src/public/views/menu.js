@@ -11,6 +11,10 @@ function backButton() {
   return html.pubButton('←Back', TOPICS.MENU_NAV_BACK)
 }
 
+function resetButton() {
+  return html.pubButton('←Back to main menu', TOPICS.MENU_NAV_RESET)
+}
+
 const pages = {
   signedOut() {
     return [
@@ -81,15 +85,18 @@ const pages = {
   askConfirmDeleteUser() {
     // ! Requires recent sign in. Deletes only auth. Do not make deletion easy in production, ask ppl to email me instead
     return [
-      backButton(),
+      resetButton(),
       html.p('Delete user:'),
       html.p('Are you sure?'),
-      html.p('(Deletion will not be that easy in production.'),
+      html.p('(Deletion will not be that easy in production)'),
       html.pubButton('Confirm delete user', TOPICS.DELETE_USER)
     ];
   },
   exampleUpload() {
+    // returns { input, button, fileCountDisplay, submitButton, dropArea };
     const u = html.upload();
+
+    u.dropArea.textContent = 'dropArea'
 
     return [
       backButton(),
@@ -97,7 +104,7 @@ const pages = {
         u.input,
         u.button,
         u.fileCountDisplay,
-        html.submitButton()
+        u.submitButton
       ])
     ];
   },
@@ -125,6 +132,12 @@ export const menu = {
 
   navigateBack() {
     menu.navHistory.pop();
+    const page = menu.navHistory.pop();
+    menu.update(page);
+  },
+
+  navigateReset() {
+    menu.navHistory = menu.navHistory.slice(0, 1);
     const page = menu.navHistory.pop();
     menu.update(page);
   }

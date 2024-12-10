@@ -146,8 +146,11 @@ export const html = {
       class: 'file-upload-input',
       style: 'display: none;'  // Hide the file input initially
     });
-    
-    const button = create('button', { type: 'button', class: 'upload-button' });
+  
+    const button = create('button', {
+      type: 'button',
+      class: 'upload-button'
+    });
     button.textContent = 'Select Files';
     button.addEventListener('click', () => {
       input.click(); // Simulate click on input element
@@ -155,9 +158,8 @@ export const html = {
   
     const fileCountDisplay = create('span', { class: 'file-count-display' });
   
-    // Create and hide the submit button initially
-    const submitButton = create('button', { type: 'submit', class: 'submit-button', style: 'display: none;' });
-    submitButton.textContent = 'Submit';
+    const submitButton = html.submitButton()
+    submitButton.style.display = 'none';
   
     // Handle file selection and show/hide buttons
     input.addEventListener('change', () => {
@@ -170,6 +172,31 @@ export const html = {
       }
     });
   
-    return { input, button, fileCountDisplay, submitButton };
+    // Handle drag-and-drop events
+    const dropArea = create('div', { class: 'drop-area' });
+  
+    dropArea.addEventListener('dragover', (event) => {
+      event.preventDefault();  // Prevent default behavior (Allow drop)
+      dropArea.classList.add('dragover');  // Optional: Add a visual indication
+    });
+  
+    dropArea.addEventListener('dragleave', () => {
+      dropArea.classList.remove('dragover');
+    });
+  
+    dropArea.addEventListener('drop', (event) => {
+      event.preventDefault();  // Prevent default drop behavior
+      const files = event.dataTransfer.files;
+      input.files = files;  // Update the input files
+      const fileCount = files.length;
+      fileCountDisplay.textContent = `${fileCount} file(s) selected`;
+  
+      // Show submit button if files are selected
+      if (fileCount > 0) {
+        submitButton.style.display = '';  // Show the submit button
+      }
+    });
+  
+    return { input, button, fileCountDisplay, submitButton, dropArea };
   }
 }

@@ -10,6 +10,7 @@ export function coupleTopics() {
       menu.update(data.navTo);
     });
     sub(TOPICS.MENU_NAV_BACK, menu.navigateBack);
+    sub(TOPICS.MENU_NAV_RESET, menu.navigateReset)
 
   // Auth state changes
     sub(TOPICS.AUTH_STATE_CHANGE_SIGNED_OUT, () => {

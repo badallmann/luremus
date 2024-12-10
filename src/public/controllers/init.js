@@ -8,7 +8,11 @@ import { authModel } from "/firebase/auth-model.js";
 const firebaseMasterSwitch = true;
 
 function firebase() {
-  if (! firebaseMasterSwitch) return;
+  if (! firebaseMasterSwitch) {
+    console.log('Firebase OFF');
+    return;
+  }
+  
   initializeFirebaseSDK();
   authModel.observeAuthStateChanges();
 }
