@@ -2,10 +2,6 @@ import { TOPICS } from '/shared/topics.js';
 import { pub, sub } from '/shared/pubsub.js';
 import { getFormData } from '/shared/utils.js';
 
-import { TOPICS } from '/shared/topics.js';
-import { pub, sub } from '/shared/pubsub.js';
-import { getFormData } from '/shared/utils.js';
-
 // API for media file handling. Files have meta data
 // Import db and storage models, or use services directly
 // See API sketch in Freeform

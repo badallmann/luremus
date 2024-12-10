@@ -1,4 +1,3 @@
-// html.js
 // Why: Encapsulate the construction of HTML/DOM elements
 
 import { pub } from '/shared/pubsub.js';
@@ -41,9 +40,7 @@ function create(tagName, attributes = {}, nodes = []) {
 }
 
 export const html = {
-  create: create,
-
-
+  create,
 
   // Shorthands
   h1(...nodes) {
@@ -92,7 +89,6 @@ export const html = {
 
   // Action
   pubButton(text, topic, payload) {
-  pubButton(text, topic, payload) {
     const b = create('button', {}, [text]);
     b.addEventListener('click', e => {
       const data = Object.assign({}, e, payload);
@@ -118,19 +114,10 @@ export const html = {
       const formData = new FormData(f);
 
       pub(topicToSubmit, { formData });
-
-    f.addEventListener("submit", function(e) {
-      e.preventDefault();  // Prevent default form submission
-
-      const formData = new FormData(f);
-
-      pub(topicToSubmit, { formData });
     });
-
 
     return f;
   },
-  submitButton(text = 'Submit') {
   submitButton(text = 'Submit') {
     return create('button', {
       type: 'submit',

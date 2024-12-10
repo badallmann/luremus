@@ -1,11 +1,8 @@
 import { auth }        from '/firebase/init-services.js';
-import { auth }        from '/firebase/init-services.js';
 import { authModel }   from '/firebase/auth-model.js';
 import { TOPICS }      from '/shared/topics.js';
 import { html }        from '/shared/html.js';
 
-function navButton(text, menuPage) {
-  return html.pubButton(text, TOPICS.MENU_NAV, { navTo: menuPage })
 function navButton(text, menuPage) {
   return html.pubButton(text, TOPICS.MENU_NAV, { navTo: menuPage })
 }
@@ -25,9 +22,6 @@ const pages = {
       navButton('Sign in', menu.pages.signIn),
       navButton('Create user', menu.pages.createUser),
       navButton('About', menu.pages.about)
-      navButton('Sign in', menu.pages.signIn),
-      navButton('Create user', menu.pages.createUser),
-      navButton('About', menu.pages.about)
     ];
   },
   signIn() {
@@ -38,7 +32,6 @@ const pages = {
       html.form(TOPICS.SUBMIT_SIGN_IN, [
         html.emailInput(),
         html.passwordInput(),
-        html.submitButton()
         html.submitButton()
       ]),
     ];
