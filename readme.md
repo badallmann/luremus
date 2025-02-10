@@ -11,7 +11,7 @@ Versus the marketplace:
 
 Target platform: Web: Mobile, desktop and social media app browsers. 
 
-Stack: AWS S3 & CloudFront, Firebase, client side vanilla JS, custom libs.
+Stack: AWS S3 & CloudFront, Firebase, client side vanilla JS.
 
 Architecture: Serverless SPA. MVC, pub-sub with constant topics for coupling. 
 
