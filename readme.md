@@ -9,7 +9,7 @@ Versus the marketplace:
 - No platform overhead when publishing, unlike social media
 - Hypersimple setup, editing and possibly social features, unlike website generators
 
-Target platform: Web – Mobile, desktop and social media app browsers. 
+Target platform: Web: Mobile, desktop and social media app browsers. 
 
 Stack: AWS S3 & CloudFront, Firebase, client side vanilla JS, custom libs.
 
