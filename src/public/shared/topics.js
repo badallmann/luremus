@@ -1,5 +1,5 @@
 export const TOPICS = Object.fromEntries([
-  
+
   // Menu navigation
   'MENU_NAV',
   'MENU_NAV_BACK',
