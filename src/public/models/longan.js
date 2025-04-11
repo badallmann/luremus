@@ -214,9 +214,11 @@ function renameFiles(files) {
 
 function handleFileUpload(data) {
   const result = getFormData(data.formData);
+  
   function anyFiles(result) {
     return result.files && result.files[0].name !== '';
   }
+
   if (anyFiles(result)) {
     const files = result.files;
     handleFiles(files);

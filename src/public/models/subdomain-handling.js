@@ -1,4 +1,4 @@
-import { urlDetails }   from "/models/url-details.js";
+import { urlDetails }   from "/models/url-handling.js";
 import { renderPortal } from "/views/portal.js"
 import { baslak }       from "/tests/baslak.js";
 import { halvorhansen } from "/tests/halvorhansen.js";

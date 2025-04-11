@@ -1,8 +1,8 @@
 import { authModel } from "/firebase/auth-model.js";
 import { pub, sub }  from "/shared/pubsub.js";
 import { TOPICS }    from "/shared/topics.js";
+import { longan }    from '/models/longan.js';
 import { menu }      from "/views/menu.js";
-import { longan } from '/models/longan.js';
 
 export function coupleTopics() {
   // Menu navigation

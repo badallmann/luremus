@@ -1,5 +1,5 @@
 import { addStylesheets } from "/shared/old-utils.js";
-import { init }           from "/controllers/init.js";
+import { init } from "/controllers/init.js";
 
 window.onload = function() {
   addStylesheets(
@@ -8,5 +8,7 @@ window.onload = function() {
     '/style/design-choices.css',
     '/style/draft.css',
   );
+
   init();
 }
+

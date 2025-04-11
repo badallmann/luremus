@@ -5,11 +5,10 @@
       "path": "."
     },
     {
-      "name": "public",
       "path": "src/public"
     }
   ],
   "settings": {
-    "liveServer.settings.multiRootWorkspaceName": "public"
+    "liveServer.settings.multiRootWorkspaceName": "luremus"
   }
 }

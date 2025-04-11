@@ -33,7 +33,7 @@ export function sub(eventId, func, stay = true) {
     subscriptions[eventId] = [];
   }
 
-  const token = Math.random().toString(36).substring(7);
+  const token = Array.from(crypto.getRandomValues(new Uint8Array(16))).map((byte) => byte.toString(16).padStart(2, '0')).join('');
   subscriptions[eventId].push({ token, func, stay });
 
   console.log('↑Sub', [eventId, func, stay ? 'stay' : 'once']);
