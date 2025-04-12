@@ -8,6 +8,5 @@ window.onload = function() {
     '/style/design-choices.css',
     '/style/draft.css',
   );
-
   init();
 }

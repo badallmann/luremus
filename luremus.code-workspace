@@ -9,6 +9,7 @@
     }
   ],
   "settings": {
-    "liveServer.settings.multiRootWorkspaceName": "luremus"
+    "liveServer.settings.multiRootWorkspaceName": "luremus",
+    "CodeGPT.apiKey": "OpenAI"
   }
 }
