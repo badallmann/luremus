@@ -135,6 +135,18 @@ function logFileNames(fileObjArr) {
   console.log('File(s):', filenames);
 }
 
+function renameFiles(files) {
+  // Assuming `someFilesArray` is an array of file objects
+  return files.map(file => {
+    // Extract and lowercase the extension
+    const fileExtension = file.name.split('.').pop().toLowerCase(); 
+    // Generate a new file name with UUID
+    const newFileName = `${crypto.randomUUID()}.${fileExtension}`;
+    // Create a new file with the new name
+    return new File([file], newFileName, { type: file.type });
+  });
+}
+
 function handleFiles(files) {
   logFileNames(files);
   return;
@@ -200,31 +212,16 @@ function handleFiles(files) {
   // Make sure longan will still function, even if one bunch of uploads went to hell
 }
 
-function renameFiles(files) {
-  // Assuming `someFilesArray` is an array of file objects
-  return files.map(file => {
-    // Extract and lowercase the extension
-    const fileExtension = file.name.split('.').pop().toLowerCase(); 
-    // Generate a new file name with UUID
-    const newFileName = `${crypto.randomUUID()}.${fileExtension}`;
-    // Create a new file with the new name
-    return new File([file], newFileName, { type: file.type });
-  });
-}
-
-
-// On TOPICS.SUBMIT_UPLOAD
-
+// Called on TOPICS.SUBMIT_UPLOAD
 function handleFileUpload(data) {
-  const result = getFormData(data.formData);
-  
-  function anyFiles(result) {
+  function areAnyFilesPresent(result) {
     return result.files && result.files[0].name !== '';
   }
 
-  if (anyFiles(result)) {
-    const files = result.files;
-    handleFiles(files);
+  const result = getFormData(data.formData);
+
+  if (areAnyFilesPresent(result)) {
+    handleFiles(result.files);
   } else {
     console.log('No files to upload');
   }
