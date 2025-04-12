@@ -5,8 +5,8 @@ export function getURLdetails() {
   const subdomain = hostnameParts.length > 2 ? hostnameParts[0] : '';
   const trailingPath = url.pathname;
   const cleanUrl = `${url.protocol}//${subdomain ? `${subdomain}.` : ''}${apexDomain}`;
-
   const obj = { subdomain, apexDomain, trailingPath, cleanUrl };
+
   console.log('URLdetails', obj);
   
   return obj;

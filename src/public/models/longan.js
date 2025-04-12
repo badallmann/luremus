@@ -212,6 +212,9 @@ function renameFiles(files) {
   });
 }
 
+
+// On TOPICS.SUBMIT_UPLOAD
+
 function handleFileUpload(data) {
   const result = getFormData(data.formData);
   

@@ -147,66 +147,57 @@ export const html = {
     i.setAttribute('autocomplete', 'new-password');
     return i;
   },
+
+
+
   upload() {
+    function updateDisplay() {
+      const count = input.files.length;
+      fileCountDisplay.textContent = `${count} file${count === 1 ? '' : 's'} selected`;
+      submitButton.style.display = count ? '' : 'none';
+    };
+
     const input = create('input', {
       type: 'file',
       id: 'upload',
       multiple: true,
       name: 'files[]',
       class: 'file-upload-input',
-      style: 'display: none;'  // Hide the file input initially
+      style: 'display: none;'
     });
-  
+    input.addEventListener('change', updateDisplay);
+
     const button = create('button', {
       type: 'button',
       class: 'upload-button'
     });
     button.textContent = 'Select Files';
-    button.addEventListener('click', () => {
-      input.click(); // Simulate click on input element
-    });
-  
+    button.addEventListener('click', () => input.click());
+
     const fileCountDisplay = create('span', { class: 'file-count-display' });
-  
-    const submitButton = html.submitButton()
+
+    const submitButton = html.submitButton();
     submitButton.style.display = 'none';
-  
-    // Handle file selection and show/hide buttons
-    input.addEventListener('change', () => {
-      const fileCount = input.files.length;
-      fileCountDisplay.textContent = `${fileCount} file(s) selected`;
-  
-      // Show submit button if files are selected
-      if (fileCount > 0) {
-        submitButton.style.display = '';  // Show the submit button
-      }
-    });
-  
-    // Handle drag-and-drop events
+
+    // Droparea
+
     const dropArea = create('div', { class: 'drop-area' });
-  
-    dropArea.addEventListener('dragover', (event) => {
-      event.preventDefault();  // Prevent default behavior (Allow drop)
-      dropArea.classList.add('dragover');  // Optional: Add a visual indication
+
+    dropArea.addEventListener('dragover', e => {
+      e.preventDefault();
+      dropArea.classList.add('dragover');
     });
-  
+
     dropArea.addEventListener('dragleave', () => {
       dropArea.classList.remove('dragover');
     });
-  
-    dropArea.addEventListener('drop', (event) => {
-      event.preventDefault();  // Prevent default drop behavior
-      const files = event.dataTransfer.files;
-      input.files = files;  // Update the input files
-      const fileCount = files.length;
-      fileCountDisplay.textContent = `${fileCount} file(s) selected`;
-  
-      // Show submit button if files are selected
-      if (fileCount > 0) {
-        submitButton.style.display = '';  // Show the submit button
-      }
+
+    dropArea.addEventListener('drop', e => {
+      e.preventDefault();
+      input.files = e.dataTransfer.files;
+      updateDisplay();
     });
-  
+
     return { input, button, fileCountDisplay, submitButton, dropArea };
   }
 }
